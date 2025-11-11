@@ -1,21 +1,13 @@
 from hub import port
 import runloop, motor, time
 
-
-
 async def main():
-    # put code here
+    # Example code using the GLUE library.
     print("Hello, World!")
+    await GLUE.MotorPairMoveForward(1400, 200) # move using the GLUE library!
 
-
-
-
-
-
-
-
-
-
+    motor.run_to_absolute_position(port.E, 36, 1000) 
+    time.sleep_ms(100)
 
 
 
@@ -37,10 +29,6 @@ async def main():
 
 # original author: https://github.com/SnowDev9099
 
-
-# call methods by doing GLUE.(The method)
-# so for example "await GLUE.MotorPairMoveForward()"
-
 # --------------------------
 
 class GLUE:
@@ -59,17 +47,13 @@ class GLUE:
 
 
     @staticmethod
-    async def TurnLeft(velocity):
-        if velocity == 0:
-            velocity = -500
+    async def TurnLeft(velocity=-500):
         time.sleep_ms(10)
         motor.run_for_time(port.C, 500, -velocity)
 
 
     @staticmethod
-    async def TurnRight(velocity):
-        if velocity == 0:
-            velocity = 500
+    async def TurnRight(velocity=-500):
         time.sleep_ms(10)
         motor.run_for_time(port.E, 500, -velocity)
 
