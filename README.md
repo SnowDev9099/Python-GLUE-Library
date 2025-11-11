@@ -19,7 +19,7 @@ GLUE (GPL 3.0 LEGO Universal Extension) is a Python library designed to simplify
 
 ## Installation
 
-Simply copy the GLUE class into your LEGO robotics project file.
+Simply copy the GLUE class from main.py: https://github.com/SnowDev9099/Python-GLUE-Library/blob/main/main.py into the bottom of your LEGO robotics project file or use the entire provided file in this repo
 
 ## Usage
 ```python
