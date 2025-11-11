@@ -27,7 +27,7 @@ async def main():
 
 # under the GPL 3.0 license respect that!
 
-# original author: https://github.com/SnowDev9099
+# original author: https://github.com/SnowDev9099/Python-GLUE-Library/tree/main
 
 # --------------------------
 
