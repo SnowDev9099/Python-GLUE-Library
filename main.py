@@ -4,13 +4,12 @@ import runloop, motor, time, color_sensor
 async def main():
     # Example code using the GLUE library.
     print("Hello, World!")
+
     await GLUE.MotorPairMoveForward(1400, 200) # move using the GLUE library!
+
 
     motor.run_to_absolute_position(port.E, 36, 1000) 
     time.sleep_ms(100)
-
-
-
 
 
 
@@ -29,7 +28,7 @@ async def main():
 
 # under the GPL 3.0 license respect that!
 
-# original author: https://github.com/SnowDev9099/Python-GLUE-Library/tree/main
+# original repo and author: https://github.com/SnowDev9099/Python-GLUE-Library/tree/main
 
 # --------------------------
 
@@ -88,10 +87,15 @@ class GLUE:
         while not MotorStop:
             motor.run(port_first, Velocity)
             motor.run(port_second, -Velocity)
-            time.sleep_ms(50)# prevents code from stopping and overloading the CPU on the Lego Spike Hub
-
+            time.sleep_ms(50) # prevents code from stopping and overloading the CPU on the Lego Spike Hub
         motor.stop(port_first)
         motor.stop(port_second)
+
+
+    
+
+    
+
 
 
 
