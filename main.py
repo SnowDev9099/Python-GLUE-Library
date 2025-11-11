@@ -50,13 +50,11 @@ class GLUE:
 
     @staticmethod
     async def TurnLeft(velocity=-500):
-        time.sleep_ms(10)
         motor.run_for_time(port.C, 500, -velocity)
 
 
     @staticmethod
     async def TurnRight(velocity=-500):
-        time.sleep_ms(10)
         motor.run_for_time(port.E, 500, -velocity)
 
     @staticmethod
@@ -90,7 +88,8 @@ class GLUE:
         while not MotorStop:
             motor.run(port_first, Velocity)
             motor.run(port_second, -Velocity)
-            time.sleep_ms(50)# prevents code from stopping and overloading the CPU on the Lego Spike robot
+            time.sleep_ms(50)# prevents code from stopping and overloading the CPU on the Lego Spike Hub
+
         motor.stop(port_first)
         motor.stop(port_second)
 
