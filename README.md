@@ -29,8 +29,10 @@ import runloop, motor, time
 async def main():
     # Basic example
     print("Hello, World!")
-    
+    await GLUE.AssignMotorPorts(port.D,port.C)
+
     # Move forward for 1400ms at velocity 200
+
     await GLUE.MotorPairMoveForward(1400, 200)
     
     # Move backward
@@ -63,6 +65,14 @@ Moves the robot backward using a motor pair.
 
 **Parameters:**
 - Same as `MotorPairMoveForward`
+
+### `await GLUE.AssignMotorPorts(Port_FIRST, Port_SECOND)`
+
+assigns a global motor pair for two ports so you wont have to define each port every line. makes faster for iterating
+
+**Parameters:**
+- Port_FIRST is the first port on the left hand side of your robot, and the Port_SECOND is the one on the right side. like english you read from left to right but you assign from left to right
+
 
 ### `TurnLeft(velocity)`
 
