@@ -1,17 +1,11 @@
-from hub import port
-import runloop, motor, time, color_sensor
+from hub import port, button
+import runloop, motor, time, color_sensor,time
 
 async def main():
     # Example code using the GLUE library.
     print("Hello, World!")
-
-    await GLUE.MotorPairMoveForward(1400, 200) # move using the GLUE library!
-
-
-    motor.run_to_absolute_position(port.E, 36, 1000) 
-    time.sleep_ms(100)
-
-
+    await GLUE.AssignMotorPorts(port.D,port.C)
+    await GLUE.MotorPairMoveForward(1500, 400) # move using the GLUE library!
 
 
 # --------------------------
@@ -34,27 +28,46 @@ async def main():
 
 class GLUE:
 
+    @staticmethod
+    async def AssignMotorPorts(Port_ONE, Port_TWO):
+        global Port_SECOND
+        global Port_FIRST
+        Port_SECOND = Port_TWO
+        Port_FIRST = Port_ONE
+
+
+
     # motor pair is already a function but when you have your drivebase hooked up to it, it tends to "get a bit funky" this aims to solve that
     @staticmethod
-    async def MotorPairMoveForward(port_first=port.C, port_second=port.E, DurationInMS=1000, Velocity=200): # port.C and port.E are typically the ones used
-        motor.run_for_time(port_first, DurationInMS, Velocity)
-        motor.run_for_time(port_second, DurationInMS, -Velocity)
+    async def MotorPairMoveForward(DurationInMS=1000, Velocity=200): # port.C and port.E are typically the ones used
+        global Port_SECOND
+        global Port_FIRST
+
+        motor.run_for_time(Port_SECOND, DurationInMS, -Velocity)
+        motor.run_for_time(Port_FIRST, DurationInMS, Velocity)
 
 
     @staticmethod
-    async def MotorPairMoveBackward(port_first=port.C, port_second=port.E, DurationInMS=1000, Velocity=200): # port.C and port.E are typically the ones used
-        motor.run_for_time(port_first, DurationInMS, -Velocity)
-        motor.run_for_time(port_second, DurationInMS, Velocity)
+    async def MotorPairMoveBackward(DurationInMS=1000, Velocity=200): # port.C and port.E are typically the ones used
+        global Port_SECOND
+        global Port_FIRST
+
+        motor.run_for_time(Port_SECOND, DurationInMS, Velocity)
+        motor.run_for_time(Port_FIRST, DurationInMS, -Velocity)
 
 
     @staticmethod
-    async def TurnLeft(velocity=-500):
-        motor.run_for_time(port.C, 500, -velocity)
+    async def TurnLeft(time=1000,velocity=-500):
+        global Port_FIRST
+        Port_FIRST
+        motor.run_for_time(Port_FIRST, 800, 500)
 
 
     @staticmethod
-    async def TurnRight(velocity=-500):
-        motor.run_for_time(port.E, 500, -velocity)
+    async def TurnRight(time=1000,velocity=-500):
+        global Port_SECOND
+        Port_SECOND
+        motor.run_for_time(Port_SECOND, 800, 500)
 
     @staticmethod
     def GetCurrentColor(port_first=port.A):
@@ -92,9 +105,9 @@ class GLUE:
         motor.stop(port_second)
 
 
-    
 
-    
+
+
 
 
 
